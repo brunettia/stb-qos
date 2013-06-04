@@ -1,0 +1,81 @@
+%!TEX root = ../rapport.tex
+
+\hypersetup{
+  pdfauthor = {\authornameone},
+  pdftitle = {\reportpdftitle},
+  pdfsubject = {\modulename, \documenttitle},
+  unicode=false,		  % non-Latin characters in Acrobat’s bookmarks
+  pdftoolbar=true,		  % show Acrobat’s toolbar?
+  pdfmenubar=true,		  % show Acrobat’s menu?
+  pdffitwindow=false,	  % window fit to page when opened
+  pdfstartview={FitH},	  % fits the width of the page to the window
+  pdfcreator={LaTeX},	  % creator of the document
+  pdfproducer={latexpdf}, % producer of the document
+  pdfkeywords={Report},	  % list of keywords
+  pdfnewwindow=true,	  % links in new window
+  colorlinks=true,		  % false: boxed links; true: colored links
+  linkcolor=black,		  % color of internal links
+  citecolor=black,		  % color of links to bibliography
+  filecolor=blue,		  % color of file links
+  urlcolor=black,		  % color of external links
+  linktoc=all
+}
+
+\setmargins{2.5cm}%		% left edge
+		   {1.5cm}%		% top edge
+		   {15.5cm}%	% text width
+		   {23.42cm}%	% text hight
+		   {14pt}%		% header hight
+		   {1cm}%		% header distance
+		   {0pt}%		% footer hight
+		   {2cm}%		% footer distance
+
+\lstset{
+	basicstyle=\footnotesize\ttfamily, % Standardschrift
+	numbers=left,				% Ort der Zeilennummern
+	numberstyle=\tiny,			% Stil der Zeilennummern
+	stepnumber=1,				% Abstand zwischen den Zeilennummern
+	numbersep=5pt,				% Abstand der Nummern zum Text
+	tabsize=2,					% Groesse von Tabs
+	extendedchars=true,			%
+	breaklines=true,			% Zeilen werden Umgebrochen
+	keywordstyle=\color{blue},
+	frame=b,		
+	keywordstyle=[1]\textbf,	% Stil der Keywords
+	keywordstyle=[2]\textbf,	%
+	keywordstyle=[3]\textbf,	%
+	keywordstyle=[4]\textbf	  %\sqrt{\sqrt{}} %
+	stringstyle=\color{blue}\ttfamily, % Farbe der String
+	showspaces=false,			% Leerzeichen anzeigen ?
+	showtabs=false,				% Tabs anzeigen ?
+	xleftmargin=17pt,
+	framexleftmargin=17pt,
+	framexrightmargin=0pt,
+	framexbottommargin=4pt,
+	backgroundcolor=\color{listinglightgray},
+	showstringspaces=false,		 % Leerzeichen in Strings anzeigen ?	
+	commentstyle=\color{listinggreen}
+}
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         C,
+         C++,
+         XML,
+         HTML,
+         Java
+ }
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{listinggray}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+
+\lstdefinelanguage{CSS} 
+{morekeywords={color,background,margin,padding,font,weight,display,position,top,left,right,bottom,list,style,border,size,white,space,min,width},
+sensitive=false, 
+morecomment=[l]{//}, 
+morecomment=[s]{/*}{*/}, 
+morestring=[b]", 
+} 
+ 
+

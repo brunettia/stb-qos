@@ -1,0 +1,7 @@
+This is makeindex, version 2.15 [TeX Live 2011] (kpathsea + Thai support).
+Scanning style file ./rapport.ist...........................done (27 attributes redefined, 0 ignored).
+Scanning input file rapport.glo....done (103 entries accepted, 0 rejected).
+Sorting entries....done (747 comparisons).
+Generating output file rapport.gls....done (75 lines written, 0 warnings).
+Output written in rapport.gls.
+Transcript written in rapport.glg.

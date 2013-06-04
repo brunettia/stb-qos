@@ -1,0 +1,147 @@
+%!TEX root = ../rapport.tex
+
+\section{Tests}
+
+Pour ce qui est des tests de la partie serveur, j'ai pris chaque requête proposé par l'\emph{\gls{api}} et je l'ai envoyé avec \emph{WizTools.org RESTClient} qui me retourne une réponse bien lisible.
+\subsection{Login} % (fold)
+\label{sub:login}
+Le tableau \ref{tab:stestLogin} reporte les résultats des tests qui ont été effectués pour la partie login de l'application.
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|X|X|X|}
+  \hline
+  \bf{Descriptif} & \bf{Paramètres} & \bf{Résultat attendu} & \bf{Résultat obtenu}\\
+  \hline
+   Se loguer & mot de passe faux & Erreur 404 & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+     Se loguer & utilisateur faux & Erreur 404 & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+       Se loguer & informations correctes & \emph{\gls{json}} user & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+\end{tabularx}
+\caption{Tests - Serveur - Résultats des tests pour la partie login}
+\label{tab:stestLogin}
+\end{table}
+% subsection login (end)
+\subsection{Maisons} % (fold)
+\label{sub:login}
+Le tableau \ref{tab:stestMaison} reporte les résultats des tests qui ont été effectués pour la partie maison de l'application.
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|X|X|X|}
+  \hline
+  \bf{Descriptif} & \bf{Paramètres} & \bf{Résultat attendu} & \bf{Résultat obtenu}\\
+  \hline
+  Toutes les maisons & - & Liste des maisons \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les maisons d'un user & id correct & Liste des maisons \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les maisons d'un user & id incorrect & null & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+   Créer une maison & Maison \emph{\gls{json}} & Maison \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Créer une maison & rien & Erreur & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+   Modifier une maison & rien & Erreur & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Modifier une maison & Modification sur une maison & Maison \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Modifier une maison & maison qui n'existe pas & Erreur & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Supprimer une maison & id correct & 204 ok & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+   Supprimer une maison & id incorrect & 404 & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+\end{tabularx}
+\caption{Tests - Serveur - Résultats des tests pour la partie maison}
+\label{tab:stestMaison}
+\end{table}
+
+\clearpage
+
+\subsection{Zones} % (fold)
+\label{sub:login}
+Le tableau \ref{tab:stestZone} reporte les résultats des tests qui ont été effectués pour la partie zone de l'application.
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|X|X|X|}
+  \hline
+  \bf{Descriptif} & \bf{Paramètres} & \bf{Résultat attendu} & \bf{Résultat obtenu}\\
+  \hline
+  Toutes les zones & - & Liste des zones \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les zones d'une maison & id correct & Liste des zones \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les zones d'une maison & id incorrect & null  & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline  
+ Créer une zone & zone correcte & zone \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline 
+  Créer une zone & pas de zone & erreur & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline 
+  Créer une zone & zone déjà existante & erreur & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline 
+  Modifier une zone & zone déjà existante & zone \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Modifier une zone & zone inexistante & zone \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Supprimer une zone & zone inexistante & erreur 404  & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Supprimer une zone & zone existante & 204 & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+\end{tabularx}
+\caption{Tests - Serveur - Résultats des tests pour la partie zone}
+\label{tab:stestZone}
+\end{table}
+
+\clearpage
+
+\subsection{Capteurs} % (fold)
+\label{sub:login}
+Le tableau \ref{tab:stestSensor} reporte les résultats des tests qui ont été effectués pour la partie capteur de l'application.
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|X|X|X|}
+  \hline
+  \bf{Descriptif} & \bf{Paramètres} & \bf{Résultat attendu} & \bf{Résultat obtenu}\\
+  \hline
+  Toutes les capteurs & - & Liste des capteurs \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les capteurs d'une zone & id correct & Liste des capteurs \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les capteurs d'une zone & id incorrect & null & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Modifier un capteur & - & erreur 404 & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Modifier un capteur & nouveau capteur & null & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Modifier un capteur & Capteur existant & Capteur \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Supprimer un capteur d'une zone & Capteur existant & Capteur \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Supprimer un capteur d'une zone & Capteur inexistant & null & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Supprimer un capteur d'une zone & Capteur pas dans la zone & Capteur \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+\end{tabularx}
+\caption{Tests - Serveur - Résultats des tests pour la partie capteur}
+\label{tab:stestSensor}
+\end{table}
+
+\clearpage
+
+\subsection{Données du capteur} % (fold)
+\label{sub:login}
+Le tableau \ref{tab:stestData} reporte les résultats des tests qui ont été effectués pour la partie données du capteur de l'application.
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|X|X|X|X|}
+  \hline
+  \bf{Descriptif} & \bf{Paramètres} & \bf{Résultat attendu} & \bf{Résultat obtenu}\\
+  \hline
+  Les données pour un capteur & capteur existant & données \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les données pour un capteur & capteur inexistant & null & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les dernières données pour un capteur & capteur existant & données \emph{\gls{json}} & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+  Les dernières données pour un capteur & capteur inexistant & null & \includegraphics[width=16px]{00_media/ok.png} \\
+  \hline
+\end{tabularx}
+\caption{Tests - Serveur - Résultats des tests pour la partie données du capteur}
+\label{tab:stestData}
+\end{table}

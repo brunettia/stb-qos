@@ -1,0 +1,162 @@
+%!TEX root = ../rapport.tex
+
+\chapter{Analyse, conception, réalisation et tests de la partie serveur}
+\label{cha:analyse_serveur}
+Ce chapitre regroupe les différentes parties qui ont été effectuées pour la partie serveur du système. Il s'agit donc d'expliquer le travail qui a été réalisé sur le \emph{\gls{webservice}} .
+\section{Analyse} % (fold)
+\label{sec:analyse_serveur}
+Cette partie décrit l'analyse qui a été faite pour la partie serveur du système. Plus précisément, \emph{\gls{jpa}}, le concept de \emph{\gls{rest}ful} service, \emph{\gls{jersey}} et \emph{\gls{dao}} seront analysés.
+\subsection{Java Persistence API} % (fold)
+\label{sub:jpa}
+\emph{\gls{jpa}} propose une interface qui permet d'intéragir avec une base de données afin de rendre des objets \gls{java} persistants. 
+
+\medskip
+
+\emph{\gls{jpa}} utilise le principe des annotations introduit dans \emph{\gls{java}} 5. Cela permet de définir des classes qui ont pour but de faire l'interface entre la base de données et l'application. C'est un mapping d'objets \emph{\gls{java}} en relation d'une base de données et vice-versa.
+
+\medskip
+
+Le site \cite{online:jpadoudou} fournit une très bonne documentation bien écrite et très complète.
+
+\subsubsection{Annotations}
+Ci-dessous, le tableau \ref{tab:jpaannot} met en avant une liste des principales annotations que l'on peut utiliser.
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|m{3cm}|X|}
+  \hline
+  \bf{Annotation} & \bf{Description} \\
+  \hline
+  @Table & Permet de préciser le nom de la table \\
+  \hline  
+  @Column & Permet d'associer un champ de la table à une propriété de l'objet \emph{\gls{java}} \\
+  \hline  
+  @Id & Permet d'associer un champ de la table à une propriété de l'objet \emph{\gls{java}} en tant que clef primaire \\
+  \hline
+  @GeneratedValue & Permet d'obtenir une clef primaire générée automatiquement \\
+  \hline   
+\end{tabularx}
+\caption{JPA - Liste d'annotations}
+\label{tab:jpaannot}
+\end{table}
+
+\subsubsection{EntityManager}
+Les liens entre la base de données et les entités sont fait par un objet \emph{EntityManager}. Ce dernier peut lire des informations, les modifier, en ajouter ou en supprimer. Il est donc très important lorsqu'on travail avec \emph{\gls{jpa}}
+
+\medskip
+
+Une analyse des différentes opérations a été effectué. Tout d'abord, il faut créer l'\emph{EntityManager} et récuperer la transaction à l'aide du code \ref{lst:entitymanagercreation}. Nous pouvons dès lors effectuer les opérations de type \emph{\gls{crud}}.
+
+\begin{lstlisting}[language={JAVA}, caption={JPA - Création d'une EntityManager}, label={lst:entitymanagercreation}]
+Persistence.createEntityManagerFactory("Base");   
+EntityManager em = emf.createEntityManager();   
+EntityTransaction tr = em.getTransaction();
+\end{lstlisting}
+
+Une fois ceci fait, il faut démarrer la transaction et faire un commit quand les opérations ont été effectuées comme le montre le code \ref{lst:transaction}.
+
+\begin{lstlisting}[language={JAVA}, caption={JPA - Gestion de la transaction}, label={lst:transaction}]
+transac.begin();
+...
+transac.commit();
+\end{lstlisting}
+
+On peut désormais effectuer les opérations désirées entre le \emph{begin} et le \emph{commit}. Pour ajouter une entité dans la base de donnée, il suffit de faire se procurer l'entité voulue et la persister comme le montre le code \ref{lst:jpa:persist}.
+
+\begin{lstlisting}[language={JAVA}, caption={JPA - Persist}, label={lst:jpa:persist}]
+MonObjet monObject = new MonObjet();
+monObject.setNom("nom");
+em.persist(monObject);
+\end{lstlisting}
+
+Pour rechercher dans la base de données, il existe une méthode \emph{find} qui permet de chercher par exemple sur un champ. Il est également possible de le faire par requête directe.
+
+\medskip
+
+Pour supprimer une ocurrence, il est possible d'utiliser la méthode \emph{remove} en lui passant l'entité à éliminer.
+
+\subsubsection{Cascade}
+\emph{\gls{jpa}} permet d'effectuer des opérations en cascade. Prenons l'exemple d'une entité \emph{Personne} qui posséderait une entité \emph{Adresse}. On peut alors dire que lorsqu'on supprime une personne dans la base de données, son adresse doit être supprimée automatiquement.
+
+\medskip
+
+Pour illustrer comment cela fonctionnerait avec l'exemple cité ci-dessus, le code \ref{lst:cascaderemove} en montre l'application.
+
+\begin{lstlisting}[language={JAVA}, caption={JPA - Suppression en cascade}, label={lst:cascaderemove}]
+@Entity
+class Personne {
+    @OneToOne(cascade=CascadeType.REMOVE)
+    private Adresse sonAdresse;
+}
+\end{lstlisting}
+
+Il existe plusieurs types de cascade cités dans la liste ci-dessous.
+
+\medskip
+
+\begin{itemize}
+  \item PERSIST
+  \item MERGE
+  \item REMOVE
+  \item REFRESH
+  \item DETACH
+\end{itemize}
+
+\subsection{Service HTTP de type RESTful} % (fold)
+\label{sub:service_de_type_restful}
+
+Un service de type \emph{\gls{rest}ful} consiste à pouvoir travailler avec des ressources en utilisant des requêtes du protocole \emph{\gls{http}}. Dans ce protocole, il existe des requêtes comme \emph{GET}, \emph{PUT}, \emph{POST} ou \emph{DELETE}.
+
+\medskip
+
+Le but est donc d'employer ces requêtes en passant des paramètres.
+
+\medskip
+
+Un exemple serait par exemple de vouloir récuperer une information simplement en requêtant l'adresse \texttt{http://service/nom\_de\_la\_ressource}.
+
+% subsection service_de_type_restful (end)
+\subsection{Jersey \& JAX-RS} % (fold)
+\label{sub:jersey_&_jax_rs}
+
+\emph{\gls{jersey}} est une implémentation de \emph{\gls{jaxrs}} et permet de développer des applications \emph{\gls{java}} qui feront office de \emph{\gls{webservice}} de type \emph{\gls{rest}ful}.
+
+\medskip
+
+Ci-dessous, au code \ref{lst:jaxrs}, se trouve un exemple d'implémentation détaillé par la suite.
+
+\begin{lstlisting}[language={JAVA}, caption={Exemple d'implémentation JAX-RS}, label={lst:jaxrs}]
+import javax.ws.rs.*;
+import com.sun.jersey.api.json.JSONWithPadding;
+
+@Path("/myRessource")
+public class MyRessourceService {
+
+  @Path("/ressources")
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public List<Ressource> getAllRessources() {
+    ...
+  }
+
+  @Path("/save")
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consums(MediaType.APPLICATION_JSON)
+  public List<Ressource> saveRessource(List<Resssouce> ressource) {
+    ...
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Détails du code}
+\begin{itemize}
+  \item Ce service sera donc accessible via l'url \emph{http://adresse/myRessource}
+  \item Pour avor la liste de toute les ressources, il suffira de faire une requête de type \emph{GET} à l'adresse \emph{http://adresse/myRessource/ressources} sans passer de paramètre. La réponse sera au format \emph{\gls{json}}
+  \item Pour insérer une ressource dans la base de données, il suffira de faire une requête de type \emph{POST} à l'adresse \emph{http://adresse/myRessource/save} en passant une liste JSON de ressource.
+\end{itemize}
+% subsection jersey_&_jax_rs (end)
+
+\subsection{Data Access Object}
+Les \gls{dao} sont généralement utilisées pour créer des interfaces simplifiant l'accès à une base de données. En effet, au lieu de devoir implémenter tout le processus d'insertion avec l'\emph{EntityManager}, la transaction, etc.. Il suffira d'appeler une méthode en passant les éléments demandés en paramètre.
+
+% section analyse (end)

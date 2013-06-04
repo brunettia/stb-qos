@@ -1,0 +1,290 @@
+%!TEX root = ../rapport.tex
+
+\section{Réalisation}
+Cette section a pour but de présenter certains détails jugés importants par rapport à l'implémentation.
+
+\subsection{UIApplicationDelegate} % (fold)
+\label{sub:uiapplicationdelegate}
+
+J'ai créé une classe \emph{IGCAppDelegate} qui est en fait le delegate de l'application. En effet, cette classe suit le protocole \emph{UIApplicationDelegate} qui permet de gérer les différentes parties du cycle de vie d'une application.
+
+\medskip 
+
+Comme  il n'était pas utile de gérer le cycle de vie dans le projet. J'ai utilisé cette classe pour partager différentes informations à travers toutes les autres classes de mon application. 
+
+\medskip
+
+Cela est assez logique car c'est une classe qui est instanciée une seule et unique fois. On appelle cela un \emph{\gls{singleton}}. Afin de récupérer son instance, il est nécessaire d'employé le code \ref{lst:appDelegateSingleton} ci-dessous.
+
+\begin{lstlisting}[language={JAVA}, caption={Récuperer l'instance de l'application delegate}, label={lst:appDelegateSingleton}]
+IGCAppDelegate * appDelegate = (IGCAppDelegate*) [UIApplication sharedApplication].delegate;
+\end{lstlisting}
+
+J'utilise par exemple ce \emph{\gls{singleton}} pour : 
+
+\medskip
+
+\begin{itemize}
+	\item Stocker le client \emph{Restkit} qui permet de faire des requêtes de type \emph{\gls{rest}}
+	\item Stocker les informations de l'utilisateur qui est connecté
+	\item Stocker la liste des capteurs disponibles
+	\item Stocker les informations de la maison qui est ouverte
+\end{itemize}
+
+\subsection{Affichage des zones et des capteurs} % (fold)
+\label{sub:affichage_des_zones_et_des_capteurs}
+
+Afin d'afficher les zones et les capteurs, j'ai utliser une technique qui consiste à créer des sous-classes de \emph{UIView}. En faisant cela, il faut ensuite implémenter la méthode \emph{drawRect} qui sera appelée entre autre automatiquement quand on ajoutera une zone ou un capteur à l'application.
+% subsection affichage_des_zones_et_des_capteurs (end)
+
+\subsection{Envoi des requêtes avec le framework ResKit} % (fold)
+\label{sub:envoi_des_requ_tes_via_reskit}
+Pour commencer, il est nécessaire de configurer un client qui sera, dans notre cas, utiliser à travers toute l'application. C'est pour cela, qu'il est stocké dans notre \emph{AppDelegate} comme discuté à la section \ref{sub:uiapplicationdelegate}. Dès lors, nous pouvons créer une instance de \emph{RKClient} comme le montre le code \ref{lst:rkclient} ci-dessous.
+
+\begin{lstlisting}[language={JAVA}, caption={Création d'une instance de RKClient}, label={lst:rkclient}]
+// Creation d'un string contenant l'url du webservice
+NSURL * myUrl = [NSURL URLWithString:WEBSERVICE_URL];
+// Creation du client
+myDelegate.client = [RKClient  clientWithBaseURL:myUrl];
+\end{lstlisting}
+
+Une fois le client configuré, nous pouvons effectuer des requêtes. Dans le projet, 4 types de requêtes ont été utilisés, à savoir \emph{PUT}, \emph{POST}, \emph{GET}, \emph{DELETE}. Néamoins, il est tout à fait possible de tout faire avec un seul et même type de requête. Il faut simplement être en accord avec le \emph{\gls{webservice}}. Pour des raisons de structures qui seront expliquées dans la section \ref{sub:reception_des_requ_tes_avec_le_framework_restkit}, le choix a été d'utiliser différents types de requêtes.
+
+\medskip
+
+Un petit exemple de chaque type de requêtes est reporté ci-dessous afin d'expliquer dans les grandes lignes comment cela fonctionne.
+
+\medskip
+
+Pour tous les exemples ci-dessous des constantes ont été définis comme dans le code \ref{lst:constantsexample}.
+
+\begin{lstlisting}[language={C}, caption={Constantes pour les exemples}, label={lst:constantsexample}]
+#define WEBSERVICE_URL @"http://{ADRESSE_IP_DESIREE}:9998/ga-service"
+#define JSON_APP @"application/json;charset=UTF-8"
+#define CONTEXT_TYPE @"Content-Type"
+\end{lstlisting}
+\subsubsection{Requête GET}
+Le code \ref{lst:getExample} ci-dessous montre comment envoyer une requête qui recupérera les maisons d'un utilisateur ayant l'\emph{ID} passé en paramètre. Comme les commentaires dans le code sont assez clairs, je ne vais pas plus détaillé.
+\begin{lstlisting}[language={JAVA}, caption={Exemple de requête GET}, label={lst:getExample}]
+// Creation du string qui contiendra la ressource
+NSString * myUrl = [NSString stringWithFormat:@"/house/user/%@", [appDelegate myUser].userId];
+
+// On effectue une requete GET sur le chemin myUrl
+[[RKClient sharedClient] get:myUrl usingBlock:^(RKRequest*request){
+	// Authentification HTTP
+	request.authenticationType = RKRequestAuthenticationTypeHTTP;
+	// On donne le type de requete, important pour la reception
+	request.method = RKRequestMethodGET;
+	// On specifie le delegate qui se chargera de la reponse
+	request.delegate = houseResponseDelegate;
+	// On ajoute des donnees au header HTTP specifiant le type de donnees
+	[request setAdditionalHTTPHeaders:[NSDictionary dictionaryWithObjectsAndKeys:JSON_APP, CONTEXT_TYPE, nil]];
+}];
+\end{lstlisting}
+
+\subsubsection{Requête POST}
+
+Le code \ref{lst:postExample} ci-dessous montre comment envoyer une requête qui modifiera la zone passée en paramètre. Comme les commentaires dans le code sont assez clairs, je ne vais pas plus détaillé.
+
+\begin{lstlisting}[language={JAVA}, caption={Exemple de requête POST}, label={lst:postExample}]
+NSDictionary * zoneDic = ... ; // construction du dictionnaire pour la requete
+// On effectue une requete POST
+[[RKClient sharedClient] post:@"/zone/updateZone" usingBlock:^(RKRequest*request){
+	// Authentification HTTP
+	request.authenticationType = RKRequestAuthenticationTypeHTTP;
+	// On donne le type de requete, important pour la reception
+	request.method = RKRequestMethodPOST;
+	// On passe le dictionnaire en parametre en donnant le mimetype
+	[request setBody:zoneDic forMIMEType:RKMIMETypeJSON];
+	// On specifie le delegate qui se chargera de la reponse
+	request.delegate = self;
+	// On ajoute des donnees au header HTTP specifiant le type de donnees
+	[request setAdditionalHTTPHeaders:[NSDictionary dictionaryWithObjectsAndKeys:JSON_APP, CONTEXT_TYPE, nil]];
+}];
+\end{lstlisting}
+\subsubsection{Requête PUT}
+Le code \ref{lst:putExample} ci-dessous montre comment envoyer une requête qui insérera la zone passée en paramètre. Comme les commentaires dans le code sont assez clairs, je ne vais pas plus détaillé.
+\begin{lstlisting}[language={JAVA}, caption={Exemple de requête PUT}, label={lst:putExample}]
+NSDictionary * houseDic = ... ; // construction du dictionnaire pour la requete
+// On effectue une requete PUT
+[[RKClient sharedClient] put:@"/house/update" usingBlock:^(RKRequest*request){
+	// Authentification HTTP
+	request.authenticationType = RKRequestAuthenticationTypeHTTP;
+	// On donne le type de requete, important pour la reception
+	request.method = RKRequestMethodPUT;
+	// On passe le dictionnaire en parametre en donnant le mimetype
+	[request setBody:houseDic forMIMEType:RKMIMETypeJSON];
+	// On specifie le delegate qui se chargera de la reponse
+	request.delegate = houseResponseDelegate;
+	// On ajoute des donnees au header HTTP specifiant le type de donnees
+	[request setAdditionalHTTPHeaders:[NSDictionary dictionaryWithObjectsAndKeys:JSON_APP, CONTEXT_TYPE, nil]];
+}];
+\end{lstlisting}
+\subsubsection{Requête DELETE}
+Le code \ref{lst:deleteExemple} ci-dessous montre comment envoyer une requête qui supprimera la maison passée en paramètre. Comme les commentaires dans le code sont assez clairs, je ne vais pas plus détaillé.
+\begin{lstlisting}[language={JAVA}, caption={Exemple de requête DELETE}, label={lst:deleteExemple}]
+// Creation du string qui contiendra la ressource
+NSString * restUrl  = [NSString stringWithFormat:@"/house/delete/%@", idToDelete];
+// On effectue une requete DELET sur le chemin restUrl   
+[[RKClient sharedClient] delete:restUrl usingBlock:^(RKRequest*request){
+	// Authentification HTTP
+	request.authenticationType = RKRequestAuthenticationTypeHTTP;
+	// On donne le type de requete, important pour la reception
+	request.method = RKRequestMethodDELETE;
+	// On specifie le delegate qui se chargera de la reponse
+	request.delegate = houseResponseDelegate;
+	// On ajoute des donnees au header HTTP specifiant le type de donnees
+	[request setAdditionalHTTPHeaders:[NSDictionary dictionaryWithObjectsAndKeys:JSON_APP, CONTEXT_TYPE, nil]];
+}];
+\end{lstlisting}
+% subsection envoi_des_requ_tes_via_reskit (end)
+
+\subsection{Réception des requêtes avec le framework RestKit} % (fold)
+\label{sub:reception_des_requ_tes_avec_le_framework_restkit}
+
+Une fois les requêtes envoyées, c'est dans les \emph{delegates} spécifiés dans le block. Deux méthodes intéressantes peuvent être implémentées pour suivre le protocole. Il s'agit d'une méthode qui est appelée lors du chargement de la réponse et une méthode qui est appelée s'il y a eu un problème.
+
+\medskip
+
+Lors d'un chargement de données, il est possible de savoir le type de requête concerné. C'est pour cela que les 4 types de requêtes sont utilisés dans le projet. Ainsi nous pouvons faire un seul \emph{delegate} pour plusieurs requête. Ceci est démontré au code \ref{lst:didloadresponse}.
+
+\begin{lstlisting}[language={JAVA}, caption={Méthode du delegate pour le chargement des données}, label={lst:didloadresponse}]
+- (void)request:(RKRequest*)request didLoadResponse:(RKResponse*)response { 
+    UIAlertView * alert;
+    if ([request isGET]) {
+        if ([response isSuccessful]) {
+        	...    
+        } else if ([response isError]){
+         	...   
+        }
+    }
+    else if ([request isDELETE]) {
+        if ([response isSuccessful]) {
+        	...
+        } else if ([response isError]){
+        	...
+        }
+    }
+    // ainsi de suite
+}
+\end{lstlisting}
+
+% subsection reception_des_requ_tes_avec_le_framework_restkit (end)
+
+\subsection{Message d'alerte} % (fold)
+\label{sub:message_d_alerte}
+Les messages d'alerte de type UIAlertView ont été employés dans le projet car ceux-ci sont très simple d'utilisation. En effet, le code \ref{lst:alertView} montre comment créer et afficher un de ces messages.
+
+\medskip
+
+Ce message sera accompagné d'un bouton \emph{OK} qui servira à l'utilisateur d'effacer le message.
+
+\begin{lstlisting}[language={JAVA}, caption={Message d'alerte}, label={lst:alertView}]
+UIAlertView * alert = [[UIAlertView alloc] initWithTitle:APP_INFO message:HOUSE_SAVED delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles: nil];
+[alert show]; 
+\end{lstlisting}
+% subsection message_d_alerte (end)
+
+\subsection{Le parsing avec SBJson} % (fold)
+\label{sub:le_parsing_avec_sbjson}
+Bien que l'utilisation du framework \emph{SBJson} ait été testée et expliquée durant la partie d'analyse, un détail important se devait d'entrer dans le rapport.
+
+\medskip
+
+En effet, le parsing effectué dans l'application se fait différemment lorsqu'on reçoit une ou plusieurs entrées de maison par exemple. C'est pour cela que le code a dû être adapté en fonction de la réponse. Le code \ref{lst:trickArray} fonctionne pour n'importe quelle réponse. En effet, elle teste si dans la réponse il y a plusieurs tableau ou non. Ainsi, on peut parser correctement notre réponse selon le nombre d'entrées.
+
+\begin{lstlisting}[language={JAVA}, caption={Parsing d'une ou des maisons}, label={lst:trickArray}]
+// On initialise le parser
+SBJsonParser * myParser = [[SBJsonParser alloc]init];
+NSDictionary *jsonObject = [myParser objectWithString:[response bodyAsString] error:nil];
+            
+// On construit un dictionnaire pour la clef houses
+NSArray* houses = [jsonObject objectForKey:HOUSE];
+
+if([houses isKindOfClass:[NSArray class]]){
+	// Si on entre ici, il y a minimum deux maisons
+	for(NSDictionary * house in houses){
+    	IGCHouse * currentHouse = [[IGCHouse alloc]init];
+        [currentHouse setHid:[house objectForKey:HOUSE_ID]];
+        [[appDelegate myUser].houses addObject:currentHouse];
+    }
+}else{
+	// Sinon il y a maximum une maison
+	if(houses){
+		// Si on entre la, il y a une seule maison
+    	IGCHouse * currentHouse = [[IGCHouse alloc]init];
+        [currentHouse setHid:[houses valueForKey:HOUSE_ID]];
+        [[appDelegate myUser].houses addObject:currentHouse];
+    }
+}
+\end{lstlisting}
+% subsection le_parsing_avec_sbjson (end)
+
+\subsection{Les notifications} % (fold)
+\label{sub:les_notifications}
+Dans le projet, l'utilisation des notifications a été un avantage. En effet, cela évite de faire des liens entre toutes les classes qui devraient normalement en avoir. Ces notifications sont essentiellement utilisées pour mettre à jour une vue. 
+
+\medskip
+
+Le principe est assez simple, on enregistre une classe à une notification en lui spécifiant son nom et la méthode à effectuer lorsqu'on la reçoit. Le code \ref{lst:notif} montre comment s'abonner à une notification.
+
+\begin{lstlisting}[language={JAVA}, caption={Inscription à une notification}, label={lst:notif}]
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(METHODE_A_EFFECTUER:) name:NOM_DE_LA_NOTIF object:nil];
+\end{lstlisting}
+
+La méthode à effectuer à une déclaration logique puisqu'elle reçoit une notification en paramètre comme le montre le code \ref{lst:methodenotif}.
+
+\begin{lstlisting}[language={JAVA}, caption={Méthode de notification}, label={lst:methodenotif}]
+- (void) receiveZoneNotification:(NSNotification *) notification;
+\end{lstlisting}
+
+On peut désormais poster une notification avec l'aide du code \ref{lst:postNotif}.
+
+\begin{lstlisting}[language={JAVA}, caption={Poster une notification}, label={lst:postNotif}]
+[[NSNotificationCenter defaultCenter] postNotificationName:NOM_DE_LA_NOTIF object:self];
+\end{lstlisting}
+
+% subsection les_notifications (end)
+
+\subsection{Gestures recognizers} % (fold)
+\label{sub:gestures_recognizers}
+Les reconnaissance de gestes ont pu être ajouté directement dans les classes \emph{IGCZone} et \emph{IGCSensor} comme ces dernières sous-classent \emph{UIView}. Ceci rend le code assez propres. Exemple pour les zones au code \ref{}.
+
+\begin{lstlisting}[language={JAVA}, caption={Gesture recognizer pour les zones}, label={lst:zonegesture}]
+UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnZone:)];
+[self addGestureRecognizer:longPress];
+\end{lstlisting}
+
+J'ai rencontré un problème lorsque je redimensionnais une zone et que je la déplaçais par la suite. En effet, c'est le plan qui prenait le focus. Cela avait pour conséquence de faire bouger le plan et non la zone.
+
+\medskip 
+
+Pour résoudre ce problème, j'ai utilisé la méthode du code \ref{lst:gestureactive} qui permet de dire au plan d'effectuer la reconnaissance ou non. Ceci a résoud mon problème dans la plupart des cas mais le \emph{BUG} apparaît encore à plusieurs reprises. Le principe de la méthode a été de savoir si on commençait à faire le geste sur une zone ou non.
+
+\begin{lstlisting}[language={JAVA}, caption={Méthode pour détection de gestes}, label={lst:gestureactive}]
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+\end{lstlisting}
+% subsection gestures_recognizers (end)
+
+\subsection{Gestion des transitions / Segues} % (fold)
+\label{sub:gestion_des_transitions_segues}
+
+Pour effectuer des transitions de vues ou pour afficher des popups, j'ai utilisé le principes des \emph{Segues} disponibles avec le \emph{Storyboard}. Celui-ci permet entre autre de savoir quand une transition va être faite afin de passer des données de vues en vues par exemple.
+
+% subsection gestion_des_transitions_segues (end)
+
+\subsection{Recherche dans une UITableView} % (fold)
+\label{sub:recherche_dans_une_table}
+
+Une option a été ajoutée au tableau qui ont pour but de lister des resssources comme les maisons ou les capteurs disponibles. Cette option permet de faire une recherche ain de filtrer le tableau si beaucoup de ressources sont présentes.
+
+\medskip
+
+Pour cela, j'ai ajouté une barre de recherche \emph{UISearchBar} dans le contrôleur de la vue et suivi le protocole \emph{UISearchBarDelegate}. Ce dernier permet d'implémenter la méthode du code \ref{lst:filtretab} et d'effectuer notre opération de filtrage.
+
+\begin{lstlisting}[language={JAVA}, caption={Filtre dans un tableau}, label={lst:filtretab}]
+-(void)searchBar:(UISearchBar*)searchBar textDidChange:(NSString*)text;
+\end{lstlisting}
+
+% subsection recherche_dans_une_table (end)
+% subsection uiapplicationdelegate (end)

@@ -1,0 +1,75 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{E}\relax \glsresetentrylist %
+\glossaryentryfield{eclipse}{\glsnamefont{Eclipse}}{Environnement de développement libre, extensible et polyvalent de la Fondation Eclipse}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{11\delimN 12}}}\glsgroupskip
+\glsgroupheading{F}\relax \glsresetentrylist %
+\glossaryentryfield{forge}{\glsnamefont{Forge}}{Plateforme collaborative de gestion de projets de l'institut des Technologies de l'information et de la communication}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{7}}}\glsgroupskip
+\glsgroupheading{G}\relax \glsresetentrylist %
+\glossaryentryfield{greecomputing}{\glsnamefont{Green Computing}}{Principe qui consiste à améliorer l'environnement dans le domaine de l'informatique}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{1}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{3}}}\glsgroupskip
+\glsgroupheading{I}\relax \glsresetentrylist %
+\glossaryentryfield{ios}{\glsnamefont{iOS}}{Système d'exploitation développé par Apple}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{1\delimN 2}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{17\delimR 22}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{75\delimN 76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}}}%
+\glossaryentryfield{ipad}{\glsnamefont{iPad}}{Tablette tactile conçue et développée par Apple}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{1\delimR 3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{15}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{17\delimN 18}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{21\delimN 22}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{27}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{62}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{77}}}%
+\glossaryentryfield{iphone}{\glsnamefont{iPhone}}{Téléphone mobile tactile conçue et développée par Apple}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{77}}}\glsgroupskip
+\glsgroupheading{J}\relax \glsresetentrylist %
+\glossaryentryfield{java}{\glsnamefont{Java}}{Langage de programmation orienté objet}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{17\delimR 19}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{45\delimR 47}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{49}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{52}}}%
+\glossaryentryfield{javascript}{\glsnamefont{JavaScript}}{Langage de programmation de script essentiellement utilisé dans le monde web}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{23}}}%
+\glossaryentryfield{jersey}{\glsnamefont{Jersey}}{Jersey permet d'implémenter des webservices de type REST en java}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{45}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{47}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{50}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{52}}}\glsgroupskip
+\glsgroupheading{L}\relax \glsresetentrylist %
+\glossaryentryfield{linux}{\glsnamefont{Linux}}{Linux ou GNU/Linux, est un système d'exploitation libre}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{2}}}\glsgroupskip
+\glsgroupheading{M}\relax \glsresetentrylist %
+\glossaryentryfield{maven}{\glsnamefont{Maven}}{Outil permettant d'automatiser le déploiement d'application Java}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{12}}}%
+\glossaryentryfield{mysql}{\glsnamefont{MySQL}}{MySQL est un système de gestion de base de données}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{2}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{17}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{48\delimN 49}}}\glsgroupskip
+\glsgroupheading{O}\relax \glsresetentrylist %
+\glossaryentryfield{obj-c}{\glsnamefont{Objective-C}}{Langage de programmation orienté objet}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{18}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{22\delimR 25}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossaryentryfield{singleton}{\glsnamefont{Singleton}}{Un Singleton est un terme utilisé pour designer une classe qui est instancié une seule et unique fois. Il s'agit également d'un pattern de conception}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{37\delimN 38}}}\glsgroupskip
+\glsgroupheading{W}\relax \glsresetentrylist %
+\glossaryentryfield{webservice}{\glsnamefont{WebService}}{Interface d'échange d'informations, de données qui s'effectue à travers le web}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{1}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{6}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{16\delimN 17}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{23}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{38}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{45}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{47\delimR 52}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{76}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}}}\glsgroupskip
+\glsgroupheading{X}\relax \glsresetentrylist %
+\glossaryentryfield{xcode}{\glsnamefont{XCode}}{Environnement de développement d'Apple permettant de créer des applications pour Mac, iPhone et iPad}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{19}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{44}}}%
+\end{theglossary}\glossarypostamble
