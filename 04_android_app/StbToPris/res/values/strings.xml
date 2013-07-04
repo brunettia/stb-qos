@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ping_on_android</string>
+    <string name="title_activity_hello">Hello</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="_data_data_iperf_project_iperf">/data/data/ch.wingo.stb/iperf</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- <string name="server_addr">ws://172.16.17.63:8080/qosServer/echo</string> -->
+    <string name="server_addr">ws://192.168.0.10:8080/qosServer/register</string>
+    <string name="server_addr_ip">192.168.0.10</string>
+
+</resources>
