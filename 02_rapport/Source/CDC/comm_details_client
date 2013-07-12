@@ -1,0 +1,11 @@
+\begin{figure}[H]
+    \begin{center}
+        \centering \includegraphics[width=0.7\linewidth]{CDC/schema_comm_client.png}
+        \caption{Schéma}
+    \end{center}
+\end{figure}
+
+
+CGN: Carrier Grade NAT, utilisé par le FAI afin d'utiliser du NAT, soit transformer un ensemble d'adresse privée en une seule adresse publique, différenciée par le port TCP.
+
+CPE: Customer Promises Equipment, équipement côté client. Il s'agit ici du routeur du client.

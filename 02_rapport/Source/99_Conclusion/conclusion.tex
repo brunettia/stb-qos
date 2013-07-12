@@ -1,0 +1,78 @@
+%!TEX root = ../rapport.tex
+
+\chapter{Conclusion} % (fold)
+\label{cha:conclusion}
+Voici le chapitre final, concluant ce travail de Bachelor. Je vais vous donner mes impressions personnelles, les problèmes rencontrer ainsi que les amélioration possibles de l'application.
+
+
+\section{Impressions personnelles} % (fold)
+\label{sec:impression_personnelle}
+J'ai énormément aimé travailler sur ce projet et j'ai beaucoup appris.
+
+\medskip
+
+Techniquement, j'ai pu découvrir énormément: l'utilisation des qualités de services dans une application, la communication à travers les WebSockets, la mise en place d'un serveur avec les Web Services. Bien que ce n'était pas une application Android la plus complète que l'on puisse faire, sans interface graphique, j'ai tout de même bien pu mettre en pratique les notions du développement sur ce système d'exploitation.
+
+\medskip
+
+J'ai aussi pu réutiliser du Backbone pour la partie Web, bien qu'un tout petit peu, mais j'avais justement eu l'occasion d'en faire durant un projet de semestre et j'étais content de voir que je connaissais cette technologie, et que je n'ai pas été dépaysé lorsque j'ai dû la réutiliser!
+
+\medskip
+
+Pour l'expérience en soit, j'ai été ravi de découvrir une entreprise telle que Wingo. J'ai vraiment été très bien accueilli et supporté tout le long du projet. Je remercie grandement Olivier qui a été mon responsable durant ce projet, ainsi que toute l'équipe avec qui je me suis bien entendu. J'ai d'ailleurs profiter des petits plaisirs en entreprise comme une petite journée sportive avec tout le monde!
+
+\medskip
+
+C'était vraiment très intéressant et enrichissant, je recommande à tout le monde d'essayer!
+
+\medskip
+
+Je remercie aussi Jean-Frédéric Wagen, Jean-Roland Schuler et Benoît Piller, avec qui les discussions durant les séances hebdomadaires se sont toujours bien déroulées et ont été constructives.
+
+\medskip
+
+J'ai beaucoup redouté de commencer ce projet, car je ne savais pas chez qui j'allais atterrir et que la partie réseau des qualités de service me faisait un peu peur. Mais finalement tout s'est très bien déroulé et je ne regrette pas une seule seconde le choix que j'ai fait. Rarement un projet n'a été aussi passionnant du début à la fin
+
+\medskip
+
+Par contre mes vieux défauts sont toujours là, notamment au niveau de la documentation que je n'ai pas tenu à jour durant toute la durée du projet. J'ai malheureusement quelques parties manquantes, notamment au niveau des résultats qui manquent ainsi que de l'analyse. Mais je sais que j'ai de quoi être fier du projet en soit, et que le travail est là.
+
+\medskip
+
+Je suis par contre un peu déçu d'avoir finalement perdu du temps sur la partie du serveur, avec la gestion de la connexion et la connexion sécurisée, car quasiment tout le projet s'est déroulé sans encombre et dans les temps. Par contre dès qu'un peu de retard a été pris il a été difficile de le rattraper, surtout lorsque cela arrive sur la fin. J'ai pour le coup dû mettre de côté la phase finale des tests, ce qui est très dommage car j'aurais pu apprendre encore beaucoup!
+\section{Problèmes rencontrés} % (fold)
+\label{sec:probl_mes_rencontr_s}
+
+\subsection{Déploiement sur la Set-Top Box} % (fold)
+Le déploiement ne fonctionnait au début pas sur la box, alors qu'il fonctionnait sur la tablette. C'est Robert, développeur chez Swisscom, qui m'a dit de ne pas passer par Eclipse mais de le faire manuellement avec adb.
+% subsection insertion_des_capteurs (end)
+
+\subsection{Installation de Jersey sur Jetty} % (fold)
+L'installation m'a donné du fil à retordre à cause de compatibilité de versions. J'aurais dû mieux lire la documentation dès le départ, ce qui m'aurait préserver quelques heures d'arrachage de cheveux!
+
+\subsection{Mise en place de SSL}
+A cause apparemment d'un bug dans la version 9.0.3 de Jetty corrigé dans la 9.0.4 puis du fait que Autobahn Android ne faisait confiance à tous les certificats qu'en étant dans le simulateur d'ADB, j'ai perdu un précieux temps sur la fin du projet.
+
+
+\section{Améliorations} % (fold)
+\label{sec:am_liorations}
+\subsection{Récupérer automatiquement les qualités de services} % (fold)
+Lorsque l'on arrive sur Thom, nous pourrions dynamiquement afficher les commandes que l'on peut envoyer sur notre STB, et non l'ajouter manuellement comme c'est le cas à présent.
+% subsection dessiner_sa_maison (end)
+\subsection{Améliorer l'ergonomie de l'application} % (fold)
+Ce qui a été implémenté sur Thom est très basique. Aucune vérification n'est faite, très peu de retour pour l'utilisateur et peu de gestion d'erreurs.
+% subsection cat_gorie_d_un_capteur (end)
+
+\subsection{Voir la reconnexion d'une STB après reboot} % (fold)
+Lorsque l'on redémarre à distance une box, nous n'avons pas de suivi. Cela veut dire que nous ne savons pas vraiment si tout s'est bien passé ou non. Il serait envisageable de pouvoir retourner lorsque la box est à nouveau connectée sur le serveur.
+% subsection actuateur (end)
+
+\subsection{Ajout de commandes à distance} % (fold)
+Plus qu'une simple analyse des qualités de service, c'est vraiment une prise en main à distance qui est possible. On l'a vu notamment avec le reboot. Ce n'est pas une qualité mais c'est utile de pouvoir le faire à distance. Tout un tas de possibilités s'offrent à nous pour le dépannage.
+% subsection version_iphone (end)
+
+
+% section am_eliorations (end)
+
+% chapter conclusion (end)
+

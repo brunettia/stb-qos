@@ -1,0 +1,20 @@
+%!TEX root = ../rapport.tex
+
+\section{Maven}
+
+Maven est un outils d'Apache permettant la gestion et la compilation de projets Java. Je l'ai utilisé pour construire mon serveur Web.
+
+\medskip
+
+Maven permet de créer un projet basique et d'ajouter ses dépendances. Celles-ci peuvent être des librairies externes, disponibles sur des dépôts en ligne, ou alors un autre projet.
+
+Il se configure grâce à un fichier XML POM (Project Object Model) qui définit le nom du projet, sa version, sous quelle forme il sera compilé et contenu (war) ainsi que les dépendances.
+
+\medskip
+
+Pour l'utiliser, il suffit de quelques commandes.
+
+\begin{itemize}
+	\item {\bf mvn clean install} permet de faire un clean \& build des sources, en téléchargeant les librairies externes définies dans notre fichier pom.xml, puis créera notre fichier WAR à déployer dans le dossier "target" à la racine du projet. Il suffit de copier ce fichier sur notre serveur Web pour que notre application soit fonctionnelle.
+	\item {\bf mvn eclipse:eclipse} permet, à partir du code source, de créer un projet importable dans Eclipse. L'avantage est d'être indépendant des autres utilisateurs. Il n'y aura aucun soucis de chemins pour les fichiers de configuration ou de librairies, car il crée le projet par rapport à son utilisateur.
+\end{itemize}

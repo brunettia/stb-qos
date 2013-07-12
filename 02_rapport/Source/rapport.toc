@@ -1,0 +1,91 @@
+\select@language {french}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Contexte}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Enonc\IeC {\'e} original}{1}{subsection.1.1.1}
+\contentsline {subsubsection}{Commentaire}{1}{section*.2}
+\contentsline {subsection}{\numberline {1.1.2}Nouvel \IeC {\'e}nonc\IeC {\'e}}{1}{subsection.1.1.2}
+\contentsline {section}{\numberline {1.2}Objectifs}{2}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Primaires}{2}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Secondaires}{2}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Sp\IeC {\'e}cifications}{2}{section.1.3}
+\contentsline {section}{\numberline {1.4}Planification}{3}{section.1.4}
+\contentsline {chapter}{\numberline {2}Analyse}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Serveur}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Communication avec la Set-Top Box}{5}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Communication avec Thom}{6}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}Android}{6}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}WebSockets sur Android}{6}{subsection.2.2.1}
+\contentsline {chapter}{\numberline {3}Environnement de d\IeC {\'e}veloppement}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}Github}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}Maven}{7}{section.3.2}
+\contentsline {section}{\numberline {3.3}D\IeC {\'e}ploiement}{8}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Set-Top Box}{8}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Serveur}{9}{subsection.3.3.2}
+\contentsline {chapter}{\numberline {4}Phase de tests simple}{10}{chapter.4}
+\contentsline {section}{\numberline {4.1}D\IeC {\'e}marrage d'un service}{10}{section.4.1}
+\contentsline {section}{\numberline {4.2}Ping}{11}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Runtime and Process}{12}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Wifi Manager}{12}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Impl\IeC {\'e}mentation}{12}{subsection.4.2.3}
+\contentsline {subsubsection}{R\IeC {\'e}cup\IeC {\'e}rer l'adresse IP de la passerelle par d\IeC {\'e}faut}{12}{section*.7}
+\contentsline {subsubsection}{Ping}{13}{section*.9}
+\contentsline {section}{\numberline {4.3}Iperf}{14}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Impl\IeC {\'e}mentation}{15}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}Hello World Serveur}{16}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Installation de Jetty}{17}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Impl\IeC {\'e}mentation du serveur}{18}{subsection.4.4.2}
+\contentsline {subsubsection}{Servlet}{19}{section*.15}
+\contentsline {subsubsection}{Socket}{20}{section*.17}
+\contentsline {subsection}{\numberline {4.4.3}R\IeC {\'e}sultat du serveur}{21}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.4}Impl\IeC {\'e}mentation du client}{21}{subsection.4.4.4}
+\contentsline {chapter}{\numberline {5}Phase de tests avanc\IeC {\'e}e}{23}{chapter.5}
+\contentsline {section}{\numberline {5.1}Conception}{24}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Identification de la Set-Top Box}{24}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Centralisation des WebSockets}{24}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Envoi de commandes sur la Set-Top Box}{25}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Synchronisation des donn\IeC {\'e}es}{26}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Gestion de la connexion}{27}{subsection.5.1.5}
+\contentsline {subsubsection}{Serveur}{27}{section*.23}
+\contentsline {subsubsection}{Client}{27}{section*.25}
+\contentsline {subsection}{\numberline {5.1.6}SSL}{27}{subsection.5.1.6}
+\contentsline {section}{\numberline {5.2}Jersey Web Services}{29}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Installation}{29}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Hello World}{30}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Impl\IeC {\'e}mentation}{31}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}WebSocketCentralisation}{33}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Impl\IeC {\'e}mentation}{33}{subsection.5.3.1}
+\contentsline {section}{\numberline {5.4}RemoteSTBSocket}{35}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Traitement des requ\IeC {\^e}tes}{35}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Gestion de la connexion}{36}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.3}Premier message re\IeC {\c c}u}{37}{subsection.5.4.3}
+\contentsline {section}{\numberline {5.5}AutoStartService sur Android}{38}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Premi\IeC {\`e}re message}{38}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Traitement des requ\IeC {\^e}tes}{39}{subsection.5.5.2}
+\contentsline {subsubsection}{Reboot}{43}{section*.32}
+\contentsline {subsection}{\numberline {5.5.3}Gestion de la connexion}{44}{subsection.5.5.3}
+\contentsline {subsubsection}{Keep Alive}{44}{section*.33}
+\contentsline {subsubsection}{Ping/Pong frames}{45}{section*.34}
+\contentsline {subsubsection}{Reconnexion au serveur}{45}{section*.35}
+\contentsline {chapter}{\numberline {6}Phase de tests production}{48}{chapter.6}
+\contentsline {section}{\numberline {6.1}Thom}{48}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Conception}{49}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Impl\IeC {\'e}mentation}{50}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}HTML de base}{50}{subsection.6.1.3}
+\contentsline {subsubsection}{Initialisation}{50}{section*.40}
+\contentsline {subsubsection}{View}{51}{section*.41}
+\contentsline {subsubsection}{Model}{52}{section*.43}
+\contentsline {chapter}{\numberline {7}Conclusion}{55}{chapter.7}
+\contentsline {section}{\numberline {7.1}Impressions personnelles}{55}{section.7.1}
+\contentsline {section}{\numberline {7.2}Probl\IeC {\`e}mes rencontr\IeC {\'e}s}{56}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}D\IeC {\'e}ploiement sur la Set-Top Box}{56}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Installation de Jersey sur Jetty}{56}{subsection.7.2.2}
+\contentsline {subsection}{\numberline {7.2.3}Mise en place de SSL}{56}{subsection.7.2.3}
+\contentsline {section}{\numberline {7.3}Am\IeC {\'e}liorations}{56}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}R\IeC {\'e}cup\IeC {\'e}rer automatiquement les qualit\IeC {\'e}s de services}{56}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Am\IeC {\'e}liorer l'ergonomie de l'application}{56}{subsection.7.3.2}
+\contentsline {subsection}{\numberline {7.3.3}Voir la reconnexion d'une STB apr\IeC {\`e}s reboot}{57}{subsection.7.3.3}
+\contentsline {subsection}{\numberline {7.3.4}Ajout de commandes \IeC {\`a} distance}{57}{subsection.7.3.4}
+\contentsline {chapter}{Liste des figures}{58}{chapter*.46}
+\contentsline {chapter}{Liste des tableaux}{59}{chapter*.47}
+\contentsline {chapter}{Liste des codes}{61}{chapter*.48}
+\contentsline {chapter}{\numberline {A}Description de la structure du DVD}{62}{appendix.A}

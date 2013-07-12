@@ -1,0 +1,341 @@
+
+\documentclass[a4paper, 12pt, svgnames]{report}
+%\documentclass[a4paper, 12pt, svgnames, twoside, openright]{report}
+
+\usepackage[francais]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx,color}
+\usepackage{hyperref}
+\usepackage{vmargin}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{afterpage} 
+\usepackage[final]{pdfpages}
+\usepackage[nowarn,style=super3colheader,acronym]{glossaries}
+\usepackage{glossary-super}
+\usepackage{lipsum}
+\usepackage{placeins}
+\usepackage{float}
+\usepackage{dirtree}
+\usepackage{multirow}
+\usepackage{libertine}
+\usepackage[svgnames]{xcolor}
+\usepackage{framed}
+\usepackage{epigraph}
+\usepackage[babel=true]{csquotes}
+\usepackage{url}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+%\makeglossaries
+
+\input{00_config/define.cfg}
+\input{00_config/pagesetup.cfg}
+
+\setcounter{tocdepth}{2}
+
+\raggedbottom
+
+
+\newcommand*\openquote{\makebox(25,-22){\scalebox{5}{``}}}
+\newcommand*\closequote{\makebox(25,-22){\scalebox{5}{''}}}
+\colorlet{shadecolor}{White}
+
+\makeatletter
+
+\newif\if@right
+\def\shadequote{\@righttrue\shadequote@i}
+\def\shadequote@i{\begin{snugshade}\begin{quote}\openquote}
+\def\endshadequote{%
+  \if@right\hfill\fi\closequote\end{quote}\end{snugshade}}
+\@namedef{shadequote*}{\@rightfalse\shadequote@i}
+\@namedef{endshadequote*}{\endshadequote}
+\makeatother
+
+\begin{document}
+
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+ \clearpage
+ {\pagestyle{empty}\origdoublepage}%
+}
+\let\cleardoublepage\clearemptydoublepage
+
+	
+	\input{00_config/glossary}
+	\input{00_config/acronym}
+	
+	% remove paragraph first line indentation
+	\setlength{\parindent}{0in}
+
+	% cover and abstract
+	\pagestyle{empty}
+	\input{00_cover/cover}
+	\cleardoublepage
+	\pagestyle{empty}
+
+	\setcounter{page}{1}
+	%\input{01_Introduction/resume}
+	\cleardoublepage
+	\pagestyle{empty}
+	\setcounter{page}{1}
+	%\input{01_Introduction/cv}
+	\pagebreak
+
+	% begin header and footer for table of content
+	\pagestyle{fancy}
+	\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+	\rhead{}
+	
+	\renewcommand{\thepage}{\roman{page}}
+	
+	\cleardoublepage
+	\setcounter{page}{1}
+	\tableofcontents
+	\clearpage
+	
+	% begin header and footer for the rest of the document
+	\makeatletter
+	   \let\ps@plain\ps@fancy
+	\makeatother
+	\pagestyle{fancy}
+	\renewcommand{\headrulewidth}{0.3pt}
+	\renewcommand{\footrulewidth}{0.3pt}
+	\renewcommand{\thepage}{\arabic{page}}
+	
+	
+	\cleardoublepage
+	\setcounter{page}{1}
+	
+	
+	\lhead{\authornameone}
+	\rhead{\today}
+	\chead{\modulename}
+	
+	\lfoot{\subjectName}
+	\rfoot{Page \thepage\ - \pageref{LastPage}}
+	\cfoot{}
+	%----------------------------------------------------------------------
+	% contenu
+	\chapter{Introduction}
+	Ce chapitre introduit le travail effectué durant 7 semaines pour mon travail de Bachelor qui s'est déroulé chez Wingo SA à Fribourg. Nous allons donc voir le contexte dans lequel ce projet a été réalisé.
+	\section{Contexte}
+	Ce projet est le fruit de 7 semaines de travail dans le cadre du projet de Bachelor de l'Ecole d'Ingénieurs et d'Architectes de Fribourg, étape finale du cursus de 3 ans de la filiale Informatique.
+	\subsection{Enoncé original}
+	Pour le développement logiciel pour une set-top box TV-multimedia sous Android.
+	
+	Société filiale de Swisscom (Suisse) SA située à Fribourg, WinGo a été créée en 2010 dans le but de développer de nouveaux services de télécommunication sur les réseaux fixe et mobile en Suisse. 
+Sa philosophie se veut innovante en matière de produits et de processus de façon à répondre à une dynamique de marché actuelle et future extrêmement compétitive.
+
+Aujourd'hui, WinGo offre déjà des produits grand-public qu'elle commercialise sous la marque M-Budget, notamment un accès internet DSL, la téléphonie fixe et une TV numérique, et propose des services en marque blanche ou en partenariat. Active également dans le domaine du mobile en tant qu'opérateur, la société WinGo développe et propose des services de type MVNO (Mobile Virtual 
+Network Operator).
+\subsubsection{Commentaire}
+Comme on peut le remarquer, l'énoncé n'est pas très explicite. C'est après discussion que nous avons pu voir en quoi consistait réellement le projet.
+\subsection{Nouvel énoncé}
+WinGo offre un service de TV sur Ip (IPTV). Il s'agit d'une Set-Top Box (STB) tournant sous Android qui reçoit le flux de données, installée chez le client. Il est actuellement possible de mesurer la Qualité de Service (QoS) entre la plateforme de streaming IPTV et le routeur ADSL du client. Il n'est par contre pas possible de mesurer cette qualité jusqu'à la Set-Top Box. Le but du projet est donc le développement d'une solution client (STB) - serveur (WinGo) permettant de mesurer la Qualité de Service depuis Thom, un outils de supervision de Wingo, jusqu'à la Set-Top Box.
+\section{Objectifs}
+\subsection{Primaires}
+\begin{itemize}
+	\item Analyse de produits existant permettant de définir la qualité d'un service
+	\item Analyse sur la possibilité d'intégrer ces produits sur la STB de WinGo
+	\item Implémentation d'un serveur recevant les données de la STB
+	\item Implémentation de la STB sous Android
+	\item Intégration des résultats du serveur sur la plateforme de supervision de l'entreprise
+\end{itemize}
+
+\subsection{Secondaires}
+\begin{itemize}
+	\item Implémentation d'une petite interface utilisateur affichant les résultats
+\end{itemize}
+
+\section{Spécifications}
+La partie cliente est la Set-Top Box. Celle-ci tourne sur Android et fait partie du réseau local de l'utilisateur. Il n'est pas possible d'atteindre directement un appareil depuis l'extérieur à cause des différentes couches de NAT. Il faudra donc que l'application soit la plus autonome possible. 
+
+\medskip
+
+Le lancement se fera donc au démarrage de la STB. Elle ne contiendra aucune interface graphique et n'aura aucun launcher. Le tout se fera sous la forme d'un service. Cela veut dire que tout se fera en "background".
+
+\medskip
+
+C'est l'application qui se chargera de se connecter au serveur. La connexion sera permanente, car nous n'aurons pas la possibilité de lancer le service à distance. Il faut donc qu'en cas de perte de connexion, une reconnexion soit faite automatiquement.
+
+\medskip
+
+Ensuite c'est elle aussi qui évaluera sa qualité de service. Les informations seront récoltées, puis envoyées au serveur. Elle devra juger la ligne qui se trouve entre la STB et le serveur.
+
+\medskip
+
+Pour la partie serveur, nous devons supporter une connexion permanente avec plusieurs centaines voir milliers d'appareils dans le futur. Le serveur devra récupérer les informations générées par la STB et les envoyer à un service de supervision, nommé THOM, qui lui affichera de manière lisible pour l'humain les résultats récoltés.
+
+\medskip
+
+Pour résumer, voici les spécifications:
+
+\medskip
+
+\begin{itemize}
+	\item Service Android sans interface graphique ni launcher
+	\item Lancement automatique au démarrage de la Set-Top Box
+	\item Connexion au serveur grâce au service Android
+	\item Récolte d'informations sur la qualité de service depuis la Set-Top Box entre celle-ci et le serveur.
+	\item Transmission des données au serveur
+	\item Serveur supportant des connexions permanentes la plus fiable possible
+	\item Scalabilité permettant la connexion de multiples appareils
+	\item Récolte des informations et transmission de celles-ci à un service de supervision
+\end{itemize}
+
+\section{Planification}
+Le déroulement aura un penchant Agile. A savoir qu'au lieu de faire les grosses phases "Analyse, conception, réalisation", nous opterons plutôt pour des cycles itératifs. C'est-à-dire que nous commencerons petit, en pure environnement de test, où nous mettrons en place une qualité de service. Lorsque ceci est prêt, nous passerons à une échelle plus proche de la production et ajouterons d'autres services et ainsi de suite. Il sera ainsi possible de rapidement se rendre compte de ce qui pourrait poser problème par la pratique et de corriger le tir plus facilement.
+
+\begin{figure}[H]
+    \begin{center}
+        \centering \includegraphics[width=1.5\linewidth, angle=90]{CDC/planning_bachelor_v2}
+    \end{center}
+\end{figure}
+	\chapter{Analyse}
+	Nous allons voir ici une analyse globale de l'application, ce que l'on peut utiliser. Durant les prochains chapitres, certaines parts d'analyse sont aussi faite.
+	\section{Serveur}
+	Le serveur a besoin de deux parties, l'une permettant la communication avec la Set-Top Box, l'autre permettant d'appeler les données depuis Thom.
+	\subsection{Communication avec la Set-Top Box}
+	Comme expliqué, nous avons besoin d'un communication permanente. Après quelques recherches et après discussions, mon choix c'est porté vers les WebSockets.
+
+\medskip
+Ce protocole, récent, vise à établir une communication bi-directionnelle, via TCP, entre un client et un serveur et ce de manière indépendante. Cela veut dire qu'il n'y a pas de question/réponse séquentielle, mais que le client comme le serveur peut envoyer des messages.
+\medskip
+Ce protocole a été mis en place en vue d'étendre HTTP et ainsi éviter la problématique du question/réponse. Ainsi, la première tentative de connexion vers un serveur WebSockets sera HTTP, qui ensuite sera mise à jour en WebSockets.
+\medskip
+Les WebSockets ont aussi été créés dans le but d'avoir énormément de connexions simultanées. On parle de milliers ou centaine de milliers. Il s'agit du futur de la communication asynchrone. Un autre point important est la durée de la connexion. Celle-ci est établie une seule fois, et peu importe le nombres de messages envoyés et quand, la communication reste ouverte et il n'y a pas besoin de se reconnecter.
+\medskip
+Au départ, les WebSockets ont été créés pour le Web, et sont donc supportés par les navigateurs, mais le protocole se développe à présent sur d'autres supports, le mobile notamment et Android.
+\medskip
+http://stackoverflow.com/questions/14703627/websockets-protocol-vs-http
+http://www.websocket.org/index.html
+\medskip
+Mon choix s'est porté sur Jetty, développé par Eclipse, pionnier dans les WebSockets.
+http://www.eclipse.org/jetty/
+\medskip
+Il existe bien sûr d'autres implémentations, de JBoss et Tomcat par exemple. Mais Jetty est très supporté et possède Eclipse derrière lui. De plus, sa documentation est claire et bien écrite, et les utilisateurs sont actifs concernant les problèmes rencontrés pour la recherche de solution.
+http://www.eclipse.org/jetty/documentation/current/websockets.html
+
+\subsection{Communication avec Thom}
+Concernant l'appel des données depuis Thom, nous sommes face à un cas typique de communication via Web Service. Il a été d'un commun accord avec Olivier d'utiliser des Web Services REST afin de transiter les messages en JSon et ainsi simplifier la manipulation et transmission des données.
+
+\medskip
+
+Mon choix s'est porté sur Jersey, car je l'ai déjà utilisé auparavant. Sa réputation précède cette implémentation qui n'a plus à se défendre.
+
+\medskip
+
+https://jersey.java.net/
+
+https://fr.wikipedia.org/wiki/Representational\_State\_Transfer
+
+\section{Android}
+Android est le système d'exploitation de la Set-Top Box. Ce qu'il faudra voir au fur et à mesure, étant donné que nous ne sommes pas face à un téléphone mobile, c'est dans quelle mesure nous pouvons développer sur cet appareil.
+
+\medskip
+
+Mais j'ai eu la chance de rencontrer Monsieur Robert Wienecke, qui travaille chez Swisscom et a participé au développement de la box. Il m'a garanti que tout fonctionnerait et que nous avons vraiment affaire à du pure développement Android. Les modifications apportées de leur part surviennent au niveau du launcher. C'est-à-dire qu'au lieu de se retrouver avec une interface Android comme nous la connaissons, nous nous retrouvons directement avec le flux de télévision ainsi qu'une surcouche graphique faite par Swisscom. Je n'aurai donc aucun soucis au niveau du développement.
+
+\subsection{WebSockets sur Android}
+Un autre besoin est donc de pouvoir communiquer via WebSocket depuis Android.
+
+\medskip
+
+De ce côté-là, il n'a que peu de choix, et l'implémentation principale nous vient d'Autobahn for Android.
+
+\medskip
+
+http://http://autobahn.ws/android
+
+Cette librairie est la plus utilisée du marché et d'ailleurs bon nombres d'autres librairies sont basées sur celle-ci. C'est un projet Open Source hébergé sur GitHub qui garanti l'implémentation des derniers standards du protocole WebSocket.
+
+https://github.com/tavendo/AutobahnAndroid/
+	\chapter{Environnement de développement}
+	\input{02_environnemnt_developpement/github}
+	\input{02_environnemnt_developpement/maven}
+	\input{02_environnemnt_developpement/deploiement}
+	\input{03_Phase_de_test/simple}
+	\input{03_Phase_de_test/avance}
+	\input{03_Phase_de_test/production}
+%	\input{01_Introduction/introduction}
+%	\input{01_Introduction/organisation}
+%
+%	\input{02_Subject/subject}
+%
+%	\input{03_Analyse/analyse_generale}
+%	\input{04_Conception/conception_generale}
+%
+%	\input{03_Analyse/analyse_client}
+%	\input{04_Conception/conception_client}
+%	\input{05_Realisation/realisation_client}
+%	\input{06_Tests/tests_client}
+%	
+%	\input{03_Analyse/analyse_serveur}
+%	\input{04_Conception/conception_serveur}
+%	\input{05_Realisation/realisation_serveur}
+%	\input{06_Tests/tests_serveur}
+%
+%	\input{06_Tests/tests_general}
+%
+%	\input{07_Resultats/resultat}
+%	
+	\input{99_Conclusion/conclusion}
+%	\input{99_Conclusion/merci}
+	
+	%-----------------------------------------------------------------------
+	% Cahier des charges
+%	\input{CDC/intro}
+%	\input{CDC/contexte}
+%	\input{CDC/objectifs}
+%	\input{CDC/spec}
+%	\input{CDC/qos}
+%	\input{CDC/planning}
+%	%----------------------------------------------------------------------
+%%	% Références
+%	\nocite{*}
+%	\renewcommand\bibname{Références}
+%	\bibliographystyle{IEEEtran}
+%	\bibliography{00_Bibli/bibli}
+%	\addcontentsline{toc}{chapter}{Références}
+%%%	%----------------------------------------------------------------------
+%%	% Glossaires
+%	\renewcommand*{\glossaryname}{Glossaire}
+%	\printglossary
+%	\addcontentsline{toc}{chapter}{Glossaire}
+%%%	%----------------------------------------------------------------------
+%%%	% Accronyme
+%	\renewcommand*{\acronymname}{Liste des acronymes}
+%	\printglossary[type=acronym]
+%	\addcontentsline{toc}{chapter}{Liste des acronymes}
+%%	%----------------------------------------------------------------------
+%%	% liste des figures
+	\renewcommand*{\listfigurename}{Liste des figures}
+	\listoffigures
+	\addcontentsline{toc}{chapter}{Liste des figures}
+	\clearpage
+%%	%----------------------------------------------------------------------
+%%	% liste des tables
+  	\listoftables
+	\addcontentsline{toc}{chapter}{Liste des tableaux}
+	\clearpage
+%%	%----------------------------------------------------------------------
+%%	% liste de codes
+	\renewcommand*{\lstlistlistingname}{Liste des codes}
+  	\lstlistoflistings
+	\addcontentsline{toc}{chapter}{Liste des codes}
+	\clearpage
+%%	%----------------------------------------------------------------------
+%%	% annexes
+	\appendix	
+	\include{00_appendices/appendices}
+	\addcontentsline{toc}{chapter}{Annexes}
+	%----------------------------------------------------------------------
+\end{document}
+

@@ -1,0 +1,40 @@
+%!TEX root = ../rapport.tex
+
+\chapter{Spécifications}
+La partie cliente est la Set-Top Box (STB). Celle-ci tourne sur Android et fait partie du réseau local de l'utilisateur. Il n'est pas possible d'atteindre directement un appareil depuis l'extérieur à cause des différentes couches de NAT. Il faudra donc que l'application soit la plus autonome possible. 
+
+\medskip
+
+Le lancement se fera donc au démarrage de la STB. Elle ne contiendra aucune interface graphique et n'aura aucun launcher. Le tout se fera sous la forme d'un service. Cela veut dire que tout se fera en "background".
+
+\medskip
+
+C'est l'application qui se chargera de se connecter au serveur. La connexion sera permanente, car nous n'aurons pas la possibilité de lancer le service à distance. Il faut donc qu'en cas de perte de connexion, une reconnexion soit faite automatiquement.
+
+\medskip
+
+Ensuite c'est elle aussi qui évaluera sa qualité de service. Les informations seront récoltées, puis envoyées au serveur. Elle devra juger la ligne qui se trouve entre la STB et le routeur.
+
+\medskip
+
+Pour la partie serveur, nous devons supporter une connexion permanente avec plusieurs centaines voir milliers d'appareils dans le futur. Le serveur devra récupérer les informations générées par la STB et les envoyer à un service de supervision, nommé THOM, qui lui affichera de manière lisible pour l'humain les résultats récoltés.
+
+\medskip
+
+Pour résumer, voici les spécifications:
+
+\medskip
+
+\begin{itemize}
+	\item Service Android sans interface graphique ni launcher
+	\item Lancement automatique au démarrage de la Set-Top Box
+	\item Connexion au serveur grâce au service Android
+	\item Récolte d'informations sur la qualité de service depuis la Set-Top Box entre celle-ci et le routeur.
+	\item Transmission des données au serveur
+	\item Serveur supportant des connexions permanentes la plus fiable possible
+	\item Scalabilité permettant la connexion de multiples appareils
+	\item Récolte des informations et transmission de celles-ci à un service de supervision
+\end{itemize}
+
+
+% section structure_du_document (end)

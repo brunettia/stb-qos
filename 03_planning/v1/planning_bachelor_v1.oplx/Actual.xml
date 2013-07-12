@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<scenario xmlns="http://www.omnigroup.com/namespace/OmniPlan/v2" id="lkL87PsxDBP">
+  <start-date>2013-05-27T06:00:00.000Z</start-date>
+  <prototype-task>
+    <task id="t4294967294">
+      <title>Tâche 1</title>
+      <effort>28800</effort>
+    </task>
+  </prototype-task>
+  <prototype-task>
+    <task id="t4294967293">
+      <title>Étape clé 1</title>
+      <type>milestone</type>
+    </task>
+  </prototype-task>
+  <prototype-task>
+    <task id="t4294967292">
+      <title>Groupe 1</title>
+      <type>group</type>
+    </task>
+  </prototype-task>
+  <prototype-resource>
+    <resource id="r4294967294">
+      <name>Ressource 1</name>
+      <type>Staff</type>
+    </resource>
+  </prototype-resource>
+  <prototype-resource>
+    <resource id="r4294967293">
+      <name>Équipement 1</name>
+      <type>Equipment</type>
+    </resource>
+  </prototype-resource>
+  <prototype-resource>
+    <resource id="r4294967292">
+      <name>Matériel 1</name>
+      <type>Material</type>
+      <units-available>0</units-available>
+      <efficiency>0</efficiency>
+    </resource>
+  </prototype-resource>
+  <prototype-resource>
+    <resource id="r4294967291">
+      <name>Groupe 1</name>
+      <type>Group</type>
+    </resource>
+  </prototype-resource>
+  <top-resource idref="r-1"/>
+  <resource id="r-1">
+    <type>Group</type>
+    <child-resource idref="r1"/>
+  </resource>
+  <resource id="r1">
+    <name>Alan</name>
+    <type>Staff</type>
+  </resource>
+  <top-task idref="t-1"/>
+  <task id="t-1">
+    <type>group</type>
+    <child-task idref="t2"/>
+    <child-task idref="t6"/>
+    <child-task idref="t11"/>
+    <child-task idref="t16"/>
+  </task>
+  <task id="t2">
+    <title>Administration</title>
+    <type>group</type>
+    <start-constraint-date>2013-05-27T08:30:00.000Z</start-constraint-date>
+    <child-task idref="t3"/>
+    <child-task idref="t4"/>
+  </task>
+  <task id="t3">
+    <title>Rédaction du cahier des charges</title>
+    <effort>41400</effort>
+    <start-constraint-date>2013-05-27T11:00:00.000Z</start-constraint-date>
+  </task>
+  <task id="t4">
+    <title>Rédaction du rapport</title>
+    <effort>979200</effort>
+    <start-constraint-date>2013-05-28T06:00:00.000Z</start-constraint-date>
+  </task>
+  <task id="t6">
+    <title>Environnement de test simple</title>
+    <type>group</type>
+    <start-constraint-date>2013-05-29T06:00:00.000Z</start-constraint-date>
+    <child-task idref="t7"/>
+    <child-task idref="t8"/>
+    <child-task idref="t9"/>
+  </task>
+  <task id="t7">
+    <title>Communication entre Android et un serveur</title>
+    <effort>28800</effort>
+    <start-constraint-date>2013-05-29T06:00:00.000Z</start-constraint-date>
+  </task>
+  <task id="t8">
+    <title>Analyse d&apos;une qualité de service et comment l&apos;utiliser </title>
+    <effort>87300</effort>
+    <start-constraint-date>2013-05-29T14:45:00.000Z</start-constraint-date>
+    <prerequisite-task idref="t7"/>
+  </task>
+  <task id="t9">
+    <title>Implémentation de cette qualité</title>
+    <effort>113400</effort>
+    <start-constraint-date>2013-06-04T06:00:00.000Z</start-constraint-date>
+    <prerequisite-task idref="t8"/>
+  </task>
+  <task id="t11">
+    <title>Environnement de test complexe</title>
+    <type>group</type>
+    <start-constraint-date>2013-06-07T14:45:00.000Z</start-constraint-date>
+    <child-task idref="t12"/>
+    <child-task idref="t13"/>
+    <child-task idref="t14"/>
+    <child-task idref="t15"/>
+  </task>
+  <task id="t12">
+    <title>Mise en place d&apos;un environnement plus proche de la réalité</title>
+    <effort>114300</effort>
+    <start-constraint-date>2013-06-10T07:00:00.000Z</start-constraint-date>
+  </task>
+  <task id="t13">
+    <title>Test de la première qualité implémentée sur cet environnement</title>
+    <effort>58500</effort>
+    <start-constraint-date>2013-06-14T06:15:00.000Z</start-constraint-date>
+    <prerequisite-task idref="t12"/>
+  </task>
+  <task id="t14">
+    <title>Analyse d&apos;une deuxième qualité de service</title>
+    <effort>58500</effort>
+    <start-constraint-date>2013-06-18T06:30:00.000Z</start-constraint-date>
+    <prerequisite-task idref="t13"/>
+  </task>
+  <task id="t15">
+    <title>Implémentation de cette qualité</title>
+    <effort>74700</effort>
+    <start-constraint-date>2013-06-20T07:15:00.000Z</start-constraint-date>
+    <prerequisite-task idref="t14"/>
+  </task>
+  <task id="t16">
+    <title>Environnement de production</title>
+    <type>group</type>
+    <start-constraint-date>2013-06-24T13:15:00.000Z</start-constraint-date>
+    <child-task idref="t17"/>
+    <child-task idref="t18"/>
+    <child-task idref="t19"/>
+  </task>
+  <task id="t17">
+    <title>Mise en place d&apos;un environnement similaire à la production</title>
+    <effort>102600</effort>
+    <start-constraint-date>2013-06-24T12:15:00.000Z</start-constraint-date>
+    <prerequisite-task idref="t15"/>
+  </task>
+  <task id="t18">
+    <title>Tests de l&apos;implémentation actuelle dans l&apos;environnement</title>
+    <effort>106200</effort>
+    <start-constraint-date>2013-06-28T08:30:00.000Z</start-constraint-date>
+    <prerequisite-task idref="t17"/>
+  </task>
+  <task id="t19">
+    <title>Intégration de la pateforme Thom pour envoyer les feedbacks</title>
+    <effort>153000</effort>
+    <start-constraint-date>2013-07-04T06:30:00.000Z</start-constraint-date>
+    <prerequisite-task idref="t18"/>
+  </task>
+  <critical-path root="-1" enabled="false" resources="false">
+    <color r="1" g="0.5" b="0.5"/>
+  </critical-path>
+</scenario>

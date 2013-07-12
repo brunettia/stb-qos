@@ -1,0 +1,58 @@
+%!TEX root = ../rapport.tex
+
+\def\includemedia{\includefile media/}
+\def\includefile{00_cover/}
+
+\newcommand{\logotop}[0]{\begin{center}\includegraphics[width=439px]{\includemedia eiafr.eps}\end{center}\vspace{0.1cm}}%\hrule}
+\newcommand{\logobottom}[0] {\includegraphics[width=160px]{\includemedia hesso.eps}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\subtitle}[1]{\begin{center}\huge{#1}\end{center}\vspace{0.8cm}}
+\newcommand{\department}[1]{\begin{center}\large{#1}\end{center}}
+\renewcommand{\date}[1]{\normalsize{#1}}
+\newcommand{\room}[1]{\normalsize{#1}}
+
+\begin{center}
+
+	\logotop
+	
+	\vspace{0.5cm}
+	
+	\HRule \\[0.2cm]
+	{\setlength{\baselineskip}{1.6\baselineskip}
+		{\LARGE{\bfseries{\documenttitle}}}\\[0.4cm]
+	\par} %%%
+	
+
+	{\LARGE{\bfseries{\subjectName}}}\\[0.2cm]
+	\HRule \\[0.5cm]
+	
+	{\LARGE{\modulename} - \documenttype}
+
+	\vspace{0.15cm}
+	
+	\department{\organisationdepartment}
+	\room{Classe \classid}
+
+	\vspace{1cm}
+	
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} lr}
+		\Large{\emph{Auteur :}} & \Large{\emph{Superviseurs :}} \\
+		& \\
+		\authornameone & \supervisornameb \\
+		\authormailone & \supervisormailb \\
+		& \\
+		& \supervisornamec\\
+		& \supervisormailc 
+	\end{tabular*}
+	\vspace{1cm} \\
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} lr}
+\Large{\emph{Expert :}} & \Large{\emph{Responsable externe :}	}\\
+		& \\
+	Benoît Piller & Olivier Macchioni\\
+	\end{tabular*}
+	\vspace{0.8cm} \\
+	\date{Fribourg, \reportdate}
+	\vspace{1cm} \\
+	\logobottom
+\end{center}
+\pagebreak
